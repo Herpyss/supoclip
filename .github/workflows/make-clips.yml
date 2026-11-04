@@ -86,9 +86,16 @@ jobs:
           uv pip install -U "yt-dlp[default]"
 
       - name: Make clips
+        env:
+          YOUTUBE_COOKIES: ${{ secrets.YOUTUBE_COOKIES }}
         run: |
           set -o pipefail
           mkdir -p out
+          if [ -n "$YOUTUBE_COOKIES" ]; then
+            printf '%s\n' "$YOUTUBE_COOKIES" > "$RUNNER_TEMP/cookies.txt"
+            export YTDLP_COOKIES_FILE="$RUNNER_TEMP/cookies.txt"
+            echo "Using YouTube cookies from secret"
+          fi
           cd backend
           TEMP_DIR="$RUNNER_TEMP/supoclip" .venv/bin/python -m scripts.make_clips \
             --url "${{ steps.req.outputs.url }}" \

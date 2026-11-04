@@ -41,6 +41,57 @@ logging.basicConfig(
 log = logging.getLogger("make_clips")
 
 
+FALLBACK_PLAYER_CLIENTS = [
+    "tv_simply",
+    "tv",
+    "web_safari",
+    "mweb",
+    "android_vr",
+    "ios",
+    "web_embedded",
+]
+
+
+def fallback_download(url: str, dest_dir: Path) -> Path | None:
+    """Retry the download with alternate YouTube player clients and optional cookies.
+
+    Datacenter IPs (like GitHub runners) often hit YouTube's bot check with the
+    default client. A cookies file (YTDLP_COOKIES_FILE) is the reliable fix;
+    alternate clients sometimes work without one.
+    """
+    import yt_dlp
+
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    cookies = os.getenv("YTDLP_COOKIES_FILE")
+    if cookies and not Path(cookies).is_file():
+        cookies = None
+    for client in FALLBACK_PLAYER_CLIENTS:
+        opts: Dict[str, Any] = {
+            "format": "bv*[height<=1080][ext=mp4]+ba[ext=m4a]/bv*[height<=1080]+ba/b[height<=1080]/b",
+            "merge_output_format": "mp4",
+            "outtmpl": str(dest_dir / "%(id)s.%(ext)s"),
+            "noplaylist": True,
+            "quiet": False,
+            "retries": 3,
+            "extractor_args": {"youtube": {"player_client": [client]}},
+        }
+        if cookies:
+            opts["cookiefile"] = cookies
+        try:
+            log.info("Fallback download with player_client=%s cookies=%s", client, bool(cookies))
+            with yt_dlp.YoutubeDL(opts) as ydl:
+                info = ydl.extract_info(url, download=True)
+            files = [
+                f for f in dest_dir.glob(f"{info['id']}.*")
+                if f.suffix.lower() in (".mp4", ".mkv", ".webm")
+            ]
+            if files:
+                return max(files, key=lambda f: f.stat().st_size)
+        except Exception as exc:
+            log.warning("player_client=%s failed: %s", client, str(exc)[:300])
+    return None
+
+
 def chunk_transcript(transcript: str, max_chars: int) -> List[str]:
     """Split the timestamped transcript on line boundaries into chunks."""
     chunks: List[str] = []
@@ -141,7 +192,13 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     log.info("Downloading %s", args.url)
-    video_path = download_youtube_video(args.url)
+    video_path = None
+    if not os.getenv("YTDLP_COOKIES_FILE"):
+        video_path = download_youtube_video(args.url)
+    if not video_path:
+        video_path = fallback_download(
+            args.url, Path(os.getenv("TEMP_DIR", "/tmp")) / "downloads"
+        )
     if not video_path:
         log.error("Download failed")
         return 1
