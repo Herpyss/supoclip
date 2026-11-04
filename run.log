@@ -1,0 +1,66 @@
+2026-11-04 01:03:53,595 INFO make_clips: Downloading https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:03:53,595 INFO src.youtube_utils: Starting YouTube download: https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:03:53,595 INFO src.youtube_utils: Starting YouTube download: https://www.youtube.com/watch?v=3Sbj_BZORr4
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:03:54,644 WARNING src.youtube_utils: Primary YouTube metadata provider yt_dlp failed for 3Sbj_BZORr4: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies. Trying youtube_data_api.
+2026-11-04 01:03:54,645 WARNING src.youtube_utils: Fallback YouTube metadata provider youtube_data_api failed for 3Sbj_BZORr4: Missing YOUTUBE_DATA_API_KEY and GOOGLE_API_KEY
+2026-11-04 01:03:54,645 WARNING src.youtube_utils: YouTube video info fetch failed for 3Sbj_BZORr4: Missing YOUTUBE_DATA_API_KEY and GOOGLE_API_KEY
+2026-11-04 01:03:54,645 ERROR src.youtube_utils: Could not retrieve video information for: https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:03:54,645 WARNING src.youtube_utils: yt-dlp download failed for https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:03:54,646 INFO src.youtube_utils: APIFY_API_TOKEN not set; skipping Apify download for https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:03:54,646 ERROR src.youtube_utils: All YouTube download providers failed for https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:03:54,646 INFO make_clips: Fallback download with player_client=tv_simply cookies=False
+[youtube] Extracting URL: https://www.youtube.com/watch?v=3Sbj_BZORr4
+[youtube] 3Sbj_BZORr4: Downloading webpage
+[youtube] 3Sbj_BZORr4: Downloading tv simply player API JSON
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:03:55,481 WARNING make_clips: player_client=tv_simply failed: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://git
+2026-11-04 01:03:55,482 INFO make_clips: Fallback download with player_client=tv cookies=False
+[youtube] Extracting URL: https://www.youtube.com/watch?v=3Sbj_BZORr4
+[youtube] 3Sbj_BZORr4: Downloading webpage
+[youtube] 3Sbj_BZORr4: Downloading tv client config
+[youtube] 3Sbj_BZORr4: Downloading player 4a1e575f-main
+[youtube] 3Sbj_BZORr4: Downloading tv player API JSON
+WARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:03:56,482 WARNING make_clips: player_client=tv failed: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://git
+2026-11-04 01:03:56,483 INFO make_clips: Fallback download with player_client=web_safari cookies=False
+[youtube] Extracting URL: https://www.youtube.com/watch?v=3Sbj_BZORr4
+[youtube] 3Sbj_BZORr4: Downloading webpage
+[youtube] 3Sbj_BZORr4: Downloading web safari client config
+[youtube] 3Sbj_BZORr4: Downloading web safari player API JSON
+WARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:03:57,948 WARNING make_clips: player_client=web_safari failed: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://git
+2026-11-04 01:03:57,950 INFO make_clips: Fallback download with player_client=mweb cookies=False
+[youtube] Extracting URL: https://www.youtube.com/watch?v=3Sbj_BZORr4
+[youtube] 3Sbj_BZORr4: Downloading webpage
+[youtube] 3Sbj_BZORr4: Downloading mweb client config
+[youtube] 3Sbj_BZORr4: Downloading mweb player API JSON
+WARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:03:59,124 WARNING make_clips: player_client=mweb failed: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://git
+2026-11-04 01:03:59,125 INFO make_clips: Fallback download with player_client=android_vr cookies=False
+[youtube] Extracting URL: https://www.youtube.com/watch?v=3Sbj_BZORr4
+[youtube] 3Sbj_BZORr4: Downloading webpage
+[youtube] 3Sbj_BZORr4: Downloading android vr player API JSON
+WARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:04:00,343 WARNING make_clips: player_client=android_vr failed: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://git
+2026-11-04 01:04:00,345 INFO make_clips: Fallback download with player_client=ios cookies=False
+[youtube] Extracting URL: https://www.youtube.com/watch?v=3Sbj_BZORr4
+[youtube] 3Sbj_BZORr4: Downloading webpage
+[youtube] 3Sbj_BZORr4: Downloading ios player API JSON
+WARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:04:01,198 WARNING make_clips: player_client=ios failed: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extract
+2026-11-04 01:04:01,199 INFO make_clips: Fallback download with player_client=web_embedded cookies=False
+[youtube] Extracting URL: https://www.youtube.com/watch?v=3Sbj_BZORr4
+[youtube] 3Sbj_BZORr4: Downloading webpage
+[youtube] 3Sbj_BZORr4: Downloading web embedded client config
+[youtube] 3Sbj_BZORr4: Downloading player 4a1e575f-main
+[youtube] 3Sbj_BZORr4: Downloading web embedded player API JSON
+WARNING: [youtube] No title found in player responses; falling back to title from initial data. Other metadata may also be missing
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:04:02,472 WARNING make_clips: player_client=web_embedded failed: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://git
+2026-11-04 01:04:02,473 ERROR make_clips: Download failed
