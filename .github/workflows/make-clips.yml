@@ -1,0 +1,119 @@
+name: Make clips
+
+# Runs the standalone SupoClip pipeline on GitHub's runners.
+# Trigger: push a change to clip-jobs/request.json on the `clip-jobs` branch,
+# or run manually from the Actions tab with a YouTube URL.
+# Output: an artifact named clips-<run> and a branch clips/<run> with the MP4s.
+
+on:
+  push:
+    branches: [clip-jobs]
+    paths: [clip-jobs/request.json]
+  workflow_dispatch:
+    inputs:
+      url:
+        description: YouTube URL
+        required: true
+      max_clips:
+        description: Max number of clips
+        default: "8"
+
+permissions:
+  contents: write
+  models: read
+
+concurrency:
+  group: make-clips
+  cancel-in-progress: false
+
+jobs:
+  clips:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      TRANSCRIPTION_PROVIDER: whisper
+      WHISPER_MODEL_SIZE: ${{ vars.WHISPER_MODEL_SIZE || 'base' }}
+      LLM: ${{ vars.CLIPS_LLM || 'openai:openai/gpt-4.1' }}
+      OPENAI_API_KEY: ${{ secrets.GITHUB_TOKEN }}
+      OPENAI_BASE_URL: https://models.github.ai/inference
+      YOUTUBE_DOWNLOAD_PROVIDER: yt_dlp
+      SELF_HOST: "true"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read request
+        id: req
+        run: |
+          if [ -n "${{ github.event.inputs.url }}" ]; then
+            URL="${{ github.event.inputs.url }}"
+            MAX="${{ github.event.inputs.max_clips }}"
+          else
+            URL=$(jq -r '.url' clip-jobs/request.json)
+            MAX=$(jq -r '.max_clips // 8' clip-jobs/request.json)
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "max=$MAX" >> "$GITHUB_OUTPUT"
+          echo "Request: $URL (max $MAX clips)"
+
+      - name: System packages
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-dejavu-core libass9 > /dev/null
+
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+
+      - name: Cache Whisper models
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/whisper
+          key: whisper-${{ env.WHISPER_MODEL_SIZE }}
+
+      - name: Install backend
+        run: |
+          cd backend
+          uv sync
+          uv pip install -U "yt-dlp[default]"
+
+      - name: Make clips
+        run: |
+          set -o pipefail
+          mkdir -p out
+          cd backend
+          TEMP_DIR="$RUNNER_TEMP/supoclip" .venv/bin/python -m scripts.make_clips \
+            --url "${{ steps.req.outputs.url }}" \
+            --out "$GITHUB_WORKSPACE/out" \
+            --max-clips "${{ steps.req.outputs.max }}" 2>&1 | tee "$GITHUB_WORKSPACE/out/run.log"
+
+      - name: Upload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: clips-${{ github.run_number }}
+          path: out/
+          retention-days: 14
+
+      - name: Publish to branch
+        if: always()
+        run: |
+          BRANCH="clips/${{ github.run_number }}"
+          [ "${{ job.status }}" = "success" ] || BRANCH="$BRANCH-failed"
+          rm -f out/*.source_map.json
+          cd out
+          git init -q -b "$BRANCH"
+          git config user.name "supoclip-bot"
+          git config user.email "supoclip-bot@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Clips for ${{ steps.req.outputs.url }}"
+          git push -q --force "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" "HEAD:refs/heads/$BRANCH"
+          echo "Published to $BRANCH"
