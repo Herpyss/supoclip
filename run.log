@@ -1,0 +1,12 @@
+2026-11-04 01:01:37,889 INFO make_clips: Downloading https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:01:37,889 INFO src.youtube_utils: Starting YouTube download: https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:01:37,890 INFO src.youtube_utils: Starting YouTube download: https://www.youtube.com/watch?v=3Sbj_BZORr4
+ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies
+2026-11-04 01:01:40,160 WARNING src.youtube_utils: Primary YouTube metadata provider yt_dlp failed for 3Sbj_BZORr4: ERROR: [youtube] 3Sbj_BZORr4: Sign in to confirm you’re not a bot. This helps protect our community. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies. Trying youtube_data_api.
+2026-11-04 01:01:40,162 WARNING src.youtube_utils: Fallback YouTube metadata provider youtube_data_api failed for 3Sbj_BZORr4: Missing YOUTUBE_DATA_API_KEY and GOOGLE_API_KEY
+2026-11-04 01:01:40,162 WARNING src.youtube_utils: YouTube video info fetch failed for 3Sbj_BZORr4: Missing YOUTUBE_DATA_API_KEY and GOOGLE_API_KEY
+2026-11-04 01:01:40,162 ERROR src.youtube_utils: Could not retrieve video information for: https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:01:40,162 WARNING src.youtube_utils: yt-dlp download failed for https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:01:40,162 INFO src.youtube_utils: APIFY_API_TOKEN not set; skipping Apify download for https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:01:40,162 ERROR src.youtube_utils: All YouTube download providers failed for https://www.youtube.com/watch?v=3Sbj_BZORr4
+2026-11-04 01:01:40,162 ERROR make_clips: Download failed
